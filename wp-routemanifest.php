@@ -14,8 +14,11 @@ Text Domain: wproutemanifest
 */
 
 // Routes Class
-require_once('library/functions/function_custom_routesclass.php');
-
+  // Support for adding Custom Routes
+  // Check that the class exists before trying to use it
+  if (!class_exists('CustomRoutes')) {
+    require_once('library/functions/function_custom_routesclass.php');
+  }
 
 // Mobile Routes
 require_once('library/functions/function_custom_routeslist.php');
