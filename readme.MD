@@ -1,12 +1,12 @@
-# wp-routemanifest
-This will add new urls to your WP install that specifically list out the urls included on the website. This can be used in tandem with another script for saving the files, such as [wp-nodeoffliner](https://github.com/scottcarver/wp-nodeoffliner).
+# wp-routemanifest 📜
+This WordPress plugin will add new URLs to your WP install that specifically list out the pages/posts included on the website. This can be used in tandem with another script for saving the files, such as [wp-nodeoffliner](https://github.com/scottcarver/wp-nodeoffliner).
 
 ## Feed Examples
 ### All Data:
-`/app/index.json` - a full list of all site URI's
+`[yourwebsite.com]/app/index.json` - a full list of all site URI's
 
 ### Changes Only: 
-`/app/changes-since-1647680271.json` - a list of site changes since a specific unix time. This is used in a `WP_Query` to be economical about only getting URIs that changed since specified modified date. 
+`[yourwebsite.com]/app/changes-since-1647680271.json` - a list of site changes since a specific unix time. This is used in a `WP_Query` to be economical about only getting URIs that changed since specified modified date. 
 
 ## Example JSON Data:
 Both feeds (index and changelog) have the same format. The base is not included to reduce the file size, and any consuming script will need to combine `base + url` to make successful requests. 
