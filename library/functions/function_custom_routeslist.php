@@ -8,36 +8,59 @@
   // Instantiate Route Object
   $manifest_routes = new CustomRoutes();
 
-  // Create an route at /app/index.json/
+  // Create an Index route at /app.json
+  // A raw feed of all scrapable content
   $manifest_routes->addRoute(
       "^app/index.json",
       function(){}, // nullify the callback
       plugin_dir_path(__FILE__) . 'function_custom_routesmobile-index.json.php',
   );
 
-
-  /*
-  // Create an route at /app/index.json/
+  // Create a Manifest route at /manifest.json
+  // A special feed for PWAs
   $manifest_routes->addRoute(
       "^app/manifest.json",
       function(){}, // nullify the callback
-      get_template_directory() . '/library/functions/function_custom_routesmobile-manifest.json.php',
+      plugin_dir_path(__FILE__) . 'function_custom_routesmobile-manifest.json.php',
   );
     
-  // Create Changelog
+
+  // Create a Redirects route at /_redirects
+  // A special feed for PWAs
   $manifest_routes->addRoute(
-    "^changelog/([^/]*)-([^/]*)/?.json",
+    "^_redirects",
+    function(){}, // nullify the callback
+    plugin_dir_path(__FILE__) . '/function_custom_routesmobile-redirects.php',
+  );
+  
+
+  // Service Worker
+  $manifest_routes->addRoute(
+    "^serviceworker.js",
+    function(){}, // nullify the callback
+    plugin_dir_path(__FILE__) . '/function_custom_routesmobile-serviceworker.js.php',
+  );
+
+
+  // Create Changelog route at /changelog-isodate1-now.json ("now" is a magic number)
+  // Get changes between 2 dates /changelog-isodate1-isodate2.json
+  // http://localhost/gutenberg-test/changelog-1553242754-1647911995.json
+  // http://localhost/gutenberg-test/changelog-1553242754-now.json
+  $manifest_routes->addRoute(
+    "^changes-since-([^/]*)/?.json",
     'api_callback_changelog',
-    get_template_directory() . '/library/functions/function_custom_routesmobile-changelog.json.php',
-    array('param1' => 1, 'param2' => 2,)
+    plugin_dir_path(__FILE__) .  '/function_custom_routesmobile-changelog.json.php',
+    array('param1' => 1)
   );
 
   // Make URL Data Available to Template
-  function api_callback_changelog($param1, $param2){
+  function api_callback_changelog($param1){
     set_query_var('starttime', $param1);
-    set_query_var('endtime', $param2);
+    // set_query_var('endtime', $param2);
+    // echo(
+    //   'start and end ' . $param1 . " " . $param2 
+    // );
   }
-  */
 
   // Flush Routes (perhaps not needed)
   $manifest_routes->forceFlush();
