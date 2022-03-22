@@ -42,10 +42,8 @@
   );
 
 
-  // Create Changelog route at /changelog-isodate1-now.json ("now" is a magic number)
-  // Get changes between 2 dates /changelog-isodate1-isodate2.json
-  // http://localhost/gutenberg-test/changelog-1553242754-1647911995.json
-  // http://localhost/gutenberg-test/changelog-1553242754-now.json
+  // Create Changelog route at /changes-since-unixtime.json ("now" is a magic number)
+  // http://localhost/gutenberg-test/changes-since-1647911995.json
   $manifest_routes->addRoute(
     "^changes-since-([^/]*)/?.json",
     'api_callback_changelog',
