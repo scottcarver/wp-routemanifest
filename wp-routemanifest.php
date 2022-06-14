@@ -22,3 +22,7 @@ Text Domain: wproutemanifest
 
 // Mobile Routes
 require_once('library/functions/function_custom_routeslist.php');
+
+// Settings Page
+// Instead of using ACF, eventually use this settings page
+require_once('library/functions/function_custom_routesettings.php');
