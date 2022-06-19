@@ -28,6 +28,14 @@
   // Create a Redirects route at /_redirects
   // A special feed for PWAs
   $manifest_routes->addRoute(
+    "^app/redirects.json",
+    function(){}, // nullify the callback
+    plugin_dir_path(__FILE__) . '/function_custom_routesmobile-redirects.json.php',
+  );
+
+    // Create a Redirects route at /_redirects
+  // A special feed for PWAs
+  $manifest_routes->addRoute(
     "^_redirects",
     function(){}, // nullify the callback
     plugin_dir_path(__FILE__) . '/function_custom_routesmobile-redirects.php',
