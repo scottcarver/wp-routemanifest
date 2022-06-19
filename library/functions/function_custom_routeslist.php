@@ -53,7 +53,7 @@
   // Create Changelog route at /changes-since-unixtime.json ("now" is a magic number)
   // http://localhost/gutenberg-test/changes-since-1647911995.json
   $manifest_routes->addRoute(
-    "^changes-since-([^/]*)/?.json",
+    "^app/changes-since-([^/]*)/?.json",
     'api_callback_changelog',
     plugin_dir_path(__FILE__) .  '/function_custom_routesmobile-changelog.json.php',
     array('param1' => 1)

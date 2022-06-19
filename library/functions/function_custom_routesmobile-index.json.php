@@ -1,9 +1,12 @@
 <?php
 // Turn this on when Editing
 $isDebug = false;
+$now = time();
 // Create an Index of all App Feeds
 $dataurls = array(
-    'base' => get_site_url()
+    'base' => get_site_url(),
+    'time_now' => $now,
+    'time_now_formatted'=> date("Y-m-d h:i:s", $now),
 );
 // $dataurls['base'] = get_site_url();
 $dataurls['types'] = array(

@@ -11,13 +11,16 @@ $starttime = get_query_var('starttime');
 $endtime = get_query_var('endtime');
 
 $changelog = (object)[
+    'base' => get_site_url(),
     'time_now' => $now,
+    'time_now_formatted'=> date("Y-m-d h:i:s", $now),
     'time_start' => intval($starttime), // can be either "then|latest" (start of time, or last sync)
-    'time_end' => intval($endtime), // can be "now|1623214111" (a specific timestamp)
-    'formatted_now'=> date("Y-m-d", $now),
-    'formatted_starttime'=> date("Y-m-d", $starttime),
+    // 'time_end' => intval($endtime), // can be "now|1623214111" (a specific timestamp)
+    'time_start_formatted'=> date("Y-m-d h:i:s", $starttime),
     // 'formatted_endtime'=> date("Y-m-d", $endtime),
-    'permalinks' => array(),
+ 
+    'urls' => array(),
+    // 'permalinks'=> array(),
     // 'everything' => array(),
 ];
 
@@ -56,7 +59,12 @@ echo('</pre>');
 if ( $the_query->have_posts()) { 
     while ( $the_query->have_posts()){
         $the_query->the_post();
-        array_push($changelog->permalinks, get_the_permalink());
+        $cleanlink = get_the_permalink();
+        $base = get_site_url();
+        $shortmatch = str_replace($base, "", $cleanlink);
+       //  var_dump($the_query);
+    //    echo(get_the_permalink() . "\n");
+        array_push($changelog->urls, $shortmatch);
        
         
         // $entry = (object)[

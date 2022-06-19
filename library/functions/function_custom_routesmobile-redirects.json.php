@@ -14,7 +14,7 @@
         'server' => $server,
         'sitename' => $sitename,
         'redirects' => array(),
-        'original' =>$retrieve_data
+        // 'original' =>$retrieve_data
     ];
     // Reformat redirects
     foreach ($retrieve_data as $retrieved_data){

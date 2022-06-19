@@ -1,45 +1,57 @@
-# wp-routemanifest 📜
-This WordPress plugin adds new Feeds to your WP install that specifically list out the pages/posts included on the website. This can be used in tandem with another script for saving the files, such as [wp-nodeoffliner](https://github.com/scottcarver/wp-nodeoffliner). The background on this is that many webscrapers rely on link-crawling, this plugin provides an explicit list of URLs to crawl.
+# wp-routemanifest ⬆️
+This WordPress plugin adds new feeds to your WP install that specifically list out the pages/posts/media included on the website. This can be used in tandem with another script for saving the URIs as files, such as [wp-nodeoffliner](https://github.com/scottcarver/wp-nodeoffliner). Many webscrapers rely on link-crawling techniques &mdash; whereas this plugin provides an explicit list of URLs to include/exclude, controlled by the site administrator.
 
-## Feed Examples
+## Automated Feeds
+*Note that the following paths are relative to your WP site.* Unlike the WP API, these urls end in .json, which makes them ready for static, which tracks well because the entire point of this project is to generate static WP sites.
 
-1. All Content Routes
-2. manifest for mobile PWA (optionally)
-3. robots.txt (optionally)
-4a/b. app/redirects.json contain a list of redirects from the Redirects plugin. _redirects is the same data formatted for Netlify.
-5. serviceworker.js - this is more powerful when server-generated! Versioning, dynamicly include requirements.
-
-### All Data:
-`[yourwebsite.com]/app/index.json` - a full list of all site URI's
-
-### Manifest
-`[yourwebsite.com]/app/manifest.json` - this is optionally added to support PWA
-
-### Redirects
-`[yourwebsite.com]/_redirects` - a list of redirects in a Netlify-friendly format
-`[yourwebsite.com]/app/redirects.json` - feed of redirects
-
-### Changes Only: 
-`[yourwebsite.com]/app/changes-since-1647680271.json` - a list of site changes since a specific unix time. This is used in a `WP_Query` to be economical about only getting URIs that changed since specified modified date. 
+### Standard Feeds
+1. A list of all content-like routes `/app/index.json` plus optional feeds, when allowed.
+1. Changes *since* a specific unixtime and now (query time) `/app/changes-since-1647680271.json`
+### Optional Feeds
+These can be enabled in the WP admin under *Settings > Manifest*.
+1. manifest for mobile PWA (optionally) `/app/manifest.json`
+1. `robots.txt` (optionally)
+1. A list of redirects from the Redirects plugin as JSON, and also the same data formatted for Netlify: `/app/redirects.json` & `/_redirects_`
+1. `serviceworker.js` - this is more powerful when server-generated! Versioning, dynamicly include requirements.
 
 ## Example JSON Data:
-Both feeds (index and changelog) have the same format. The base is not included to reduce the file size, and any consuming script will need to combine `base + url` to make successful requests. 
+Both of the Standard feeds (index and changelog) have the same format. The base is not included to reduce the file size, and any consuming script will need to combine `base + url` to make successful requests.
 
+### Debased Mode (default)
+The feed will be much smaller by debasing the urls, although depending on compressing it may not matter anyway.
 <pre>
 {
-    "base": "http://yourwebsite.com",
+    "base": "http://yourwebsite.com/",
     "urls": [
-        url1,
-        url2,
-        url3,
-        folder1/url4,
+        "url1",
+        "url2",
+        "url3",
+        "folder1/url4",
     ]
 }
 </pre>
 
 
+
 # 🚧 Experimental Features 🚧
-This plugin also generates these urls, and includes them in the feed. In the future this will become optional.
-- `_redirects` - a format used by netlify (in progress)
-- `serviceworker.js` - a dynamically generated service worker (in progress)
-- `app/manifest.json` - a config file used by PWAs (in progress)
+
+
+### Todo
+- Many of the optional feeds are placeholders for now
+- based mode
+
+
+
+### Based Mode
+(NEEDS A UI TOGGLE, and INTEGRATION).
+The full url scheme is is simpler overall but the file, when saved as a static asset, will be much larger.
+<pre>
+{
+    "permalinks": [
+        "http://yourwebsite.com/url1",
+        "http://yourwebsite.com/url2",
+        "http://yourwebsite.com/url3",
+        "http://yourwebsite.com/folder1/url4",
+    ]
+}
+</pre>
