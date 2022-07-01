@@ -25,8 +25,15 @@
   );
     
 
-  // Create a Redirects route at /_redirects
-  // A special feed for PWAs
+    // Create a Manifest route at /lastmeal.json
+  $manifest_routes->addRoute(
+    "^app/lastmeal.json",
+    function(){}, // nullify the callback
+    plugin_dir_path(__FILE__) . 'function_custom_routesmobile-lastmeal.json.php',
+);
+
+
+  // Create a Redirects route at /app/redirects.json
   $manifest_routes->addRoute(
     "^app/redirects.json",
     function(){}, // nullify the callback
@@ -34,7 +41,6 @@
   );
 
     // Create a Redirects route at /_redirects
-  // A special feed for PWAs
   $manifest_routes->addRoute(
     "^_redirects",
     function(){}, // nullify the callback
