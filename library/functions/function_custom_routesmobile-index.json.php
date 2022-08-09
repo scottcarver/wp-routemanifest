@@ -15,6 +15,7 @@ $dataurls['types'] = array(
 );
 $dataurls['slugs'] = array('post-url', 'page-url');
 $dataurls['app'] = array(
+    '/',
     '/app/index.json',
     '/app/manifest.json', 
     '/_redirects',

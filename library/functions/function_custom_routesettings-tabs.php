@@ -2,7 +2,7 @@
 
 <?php
 function uwcc_checkbox_field_1_render() {
-
+    $types = get_post_types();
     $options = get_option( 'uwcc_settings', [] );
 
     $uwcc_checkbox_field_1 = isset( $options['uwcc_checkbox_field_1'] )
@@ -15,9 +15,11 @@ function uwcc_checkbox_field_1_render() {
     <input type='checkbox' name='uwcc_settings[uwcc_checkbox_field_1][]' <?php checked( in_array( 'Amex', $uwcc_checkbox_field_1 ), 1 ); ?> value='Amex'>
        <label>Amex</label>
     <?php
-
+    echo('<pre>');
+    var_dump($types);
+    echo('</pre>');
 }
-uwcc_checkbox_field_1_render();
+
 ?>
     <div class="tabs">
         <input name="tabs" type="radio" id="tab-1" checked="checked" class="input"/>
@@ -31,7 +33,8 @@ uwcc_checkbox_field_1_render();
     );
         // Get the value of the setting we've registered with register_setting()
     $options = get_option( 'wporg_options' );
-    var_dump($options);
+    // var_dump($options);
+    uwcc_checkbox_field_1_render();
     ?>
     <select
             id="<?php echo esc_attr( $args['label_for'] ); ?>"

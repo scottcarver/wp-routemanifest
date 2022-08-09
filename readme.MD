@@ -55,3 +55,16 @@ The full url scheme is is simpler overall but the file, when saved as a static a
     ]
 }
 </pre>
+
+
+### Settings Page
+This project uses ACF pro to add a settings page. You will see this under "Settings > Manifest" in the admin. When ACF pro is disabled, it simply will not show (ACF is not bundled, but is a dependency).
+
+It's proven challenging to run acf-json on multiple simutaneous projects (theme/plugin) so instead this project uses the PHP export feature, which is much easier to include and distribute in a theme/plugin.
+
+## To update the fieldgroup
+- import the json to a wp install (if not already running)
+- make changes to the fieldgroup
+- export both PHP and JSON
+- place both in the project
+- this allows for future updaters to have the necessary files for WP-admin (the json export), but the code 

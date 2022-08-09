@@ -40,13 +40,19 @@
     plugin_dir_path(__FILE__) . '/function_custom_routesmobile-redirects.json.php',
   );
 
-    // Create a Redirects route at /_redirects
+  // Create a Redirects route at /_redirects
   $manifest_routes->addRoute(
     "^_redirects",
     function(){}, // nullify the callback
     plugin_dir_path(__FILE__) . '/function_custom_routesmobile-redirects.php',
   );
   
+   // Create a Redirects route at /_redirects
+   $manifest_routes->addRoute(
+    "^netlify.toml",
+    function(){}, // nullify the callback
+    plugin_dir_path(__FILE__) . '/function_custom_routeslist-netlifytoml.php',
+  );
 
   // Service Worker
   $manifest_routes->addRoute(
@@ -54,7 +60,6 @@
     function(){}, // nullify the callback
     plugin_dir_path(__FILE__) . '/function_custom_routesmobile-serviceworker.js.php',
   );
-
 
   // Create Changelog route at /changes-since-unixtime.json ("now" is a magic number)
   // http://localhost/gutenberg-test/changes-since-1647911995.json

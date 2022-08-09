@@ -54,16 +54,11 @@ add_action( 'admin_init', 'wporg_settings_init' );
  * @param array $args  The settings array, defining title, id, callback.
  */
 function wporg_section_developers_callback( $args ) {
-    ?>
-    <?php /*
-    <p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Follow the white rabbit.', 'wporg' ); ?></p>
-    */ ?>
-    <?php include('function_custom_routesettings-tabs.php'); ?>
-    <?php
+    include('function_custom_routesettings-tabs.php');
 }
  
 /**
- * Pill field callbakc function.
+ * Pill field callbacl function.
  *
  * WordPress has magic interaction with the following keys: label_for, class.
  * - the "label_for" key value is used for the "for" attribute of the <label>.
