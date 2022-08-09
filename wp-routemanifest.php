@@ -54,7 +54,7 @@ function my_acf_op_init() {
 }
 
 
-function acf_load_color_field_choices( $field ) {
+function acf_load_posttype_choices( $field ) {
     
   // reset choices
   $choices = get_post_types(
@@ -80,7 +80,7 @@ function acf_load_color_field_choices( $field ) {
   
 }
 
-add_filter('acf/load_field/name=allowedtypes', 'acf_load_color_field_choices');
+add_filter('acf/load_field/name=allowedtypes', 'acf_load_posttype_choices');
 
 
 
